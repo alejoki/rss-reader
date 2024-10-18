@@ -1,0 +1,158 @@
+/* styles.css */
+
+/* Basic styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#feed-url {
+    border: none;
+    border-bottom: 1px solid #333;
+}
+#feed-url:focus {
+    outline: none;
+}
+
+#feed-form {
+    margin-bottom: 1em;
+}
+
+header, footer {
+    text-align: center;
+    padding: 1em 0;
+}
+
+#theme-toggle, #update-feeds, #prev-feed, #next-feed, #add-feed {
+    background: none;
+    border: none;
+    margin-top: 0.5em;
+    padding: 0.25em 0.5em;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+#theme-toggle:hover, #update-feeds:hover, #prev-feed:hover, #next-feed:hover, #add-feed:hover {
+    border-bottom: 1px solid #333;
+}
+#next-feed:disabled, #prev-feed:disabled {
+    border: none;
+}
+#feed-navigation {
+    text-align: center;
+    margin: 1em 0;
+}
+
+#feed-navigation button {
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+}
+
+/* Center the feed(s) in the container */
+#feed-container {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    justify-content: center; /* Center the feeds */
+    align-items: stretch;
+}
+
+/* Feed column styling */
+.feed-column {
+    flex: 0 0 auto; /* Prevent flex items from shrinking */
+    width: 350px;    /* Fixed width */
+    box-sizing: border-box;
+    padding: 0.5em;
+}
+
+/* Feed header */
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.feed-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.remove-feed-button {
+    background: none;
+    border: none;
+    padding: 0.3em 0.6em;
+    cursor: pointer;
+    height: 24px;
+    width: 90px;
+    font-size: 0.75em;
+}
+
+.remove-feed-button:hover {
+    border-bottom: 1px solid #333;
+}
+
+.feed-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1em;
+    margin-bottom: 1em;
+    word-wrap: break-word;
+    /*background-color: #fafafa;*/
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode header, .dark-mode footer {
+    background-color: #444;
+}
+
+.dark-mode .feed-item {
+    background-color: #555;
+    border-color: #666;
+}
+
+/* Single-feed view styles */
+.single-feed-view #feed-container {
+    flex-wrap: nowrap;
+    justify-content: center; /* Center the feed */
+}
+
+.single-feed-view .feed-column {
+    display: none; /* Hide all feed columns by default */
+}
+
+.single-feed-view .feed-column.active {
+    display: block; /* Show only the active feed */
+    flex: 0 0 auto;
+    max-width: 600px; /* Set a max-width for the feed */
+    width: 100%;
+    margin: 0 auto; /* Center the feed */
+}
+
+#loading {
+    text-align: center;
+    padding: 2em 0;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #555;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
