@@ -268,6 +268,7 @@ class FeedManager {
         if (this.currentFeedIndex < 0) {
             this.currentFeedIndex = 0;
         }
+        const scrollPosition = window.scrollY || window.pageYOffset;
     
         const endIndex = this.currentFeedIndex + this.visibleFeedsCount;
         const visibleUrls = this.feedUrls.slice(this.currentFeedIndex, endIndex);
@@ -292,7 +293,7 @@ class FeedManager {
                 feedContainer.appendChild(placeholder);
             }
         }
-    
+        window.scrollTo(0, scrollPosition);
         this.updateNavigationButtons();
     }
 
