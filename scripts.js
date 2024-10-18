@@ -38,7 +38,7 @@ class FeedManager {
         document.getElementById('prev-feed').addEventListener('click', this.showPreviousFeed);
         document.getElementById('next-feed').addEventListener('click', this.showNextFeed);
 
-        window.addEventListener('resize', debounce(this.checkViewport, 200));
+        // window.addEventListener('resize', debounce(this.checkViewport, 200)); // Bugs sometimes
 
         // Load the saved theme preference
         const savedTheme = localStorage.getItem('theme');
