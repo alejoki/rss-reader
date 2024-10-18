@@ -18,6 +18,9 @@ class FeedManager {
             timeout = setTimeout(() => func.apply(context, args), wait);
         };
     }
+    isMobileDevice() {
+        return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
 
     init() {
         // Bind methods to ensure 'this' context is correct
@@ -38,7 +41,10 @@ class FeedManager {
         document.getElementById('prev-feed').addEventListener('click', this.showPreviousFeed);
         document.getElementById('next-feed').addEventListener('click', this.showNextFeed);
 
-        // window.addEventListener('resize', debounce(this.checkViewport, 200)); // Bugs sometimes
+        if (!this.isMobileDevice()) {
+            // Debounce the resize event handler
+            window.addEventListener('resize', debounce(this.checkViewport, 200));
+        }
 
         // Load the saved theme preference
         const savedTheme = localStorage.getItem('theme');
