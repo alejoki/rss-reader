@@ -10,14 +10,6 @@ class FeedManager {
         this.init();
         //localStorage.removeItem('feedUrls'); // Clear local storage
     }
-    debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            const context = this;
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(context, args), wait);
-        };
-    }
     isMobileDevice() {
         return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
@@ -43,7 +35,7 @@ class FeedManager {
 
         if (!this.isMobileDevice()) {
             // Debounce the resize event handler
-            window.addEventListener('resize', debounce(this.checkViewport, 200));
+            window.addEventListener('resize', this.checkViewport);
         }
 
         // Load the saved theme preference
