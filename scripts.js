@@ -10,6 +10,14 @@ class FeedManager {
         this.init();
         //localStorage.removeItem('feedUrls'); // Clear local storage
     }
+    debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+        };
+    }
 
     init() {
         // Bind methods to ensure 'this' context is correct
@@ -30,7 +38,7 @@ class FeedManager {
         document.getElementById('prev-feed').addEventListener('click', this.showPreviousFeed);
         document.getElementById('next-feed').addEventListener('click', this.showNextFeed);
 
-        window.addEventListener('resize', this.checkViewport);
+        window.addEventListener('resize', debounce(this.checkViewport, 200));
 
         // Load the saved theme preference
         const savedTheme = localStorage.getItem('theme');
