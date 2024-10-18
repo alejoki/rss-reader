@@ -103,22 +103,49 @@ header, footer {
     word-wrap: break-word;
     /*background-color: #fafafa;*/
 }
+.feed-item h3 a {
+    color: #333;
+}
+.feed-item h3 a:visited {
+    color: #888;
+}
 
 /* Dark mode styles */
 .dark-mode {
     background-color: #333;
     color: #fff;
 }
+.dark-mode #feed-url {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: #333;
+    color: #fff;
+}
+.dark-mode #feed-url:focus {
+    outline: none;
+    caret-color: #fff;
+}
 
 .dark-mode header, .dark-mode footer {
-    background-color: #444;
+    background-color: #333;
 }
 
 .dark-mode .feed-item {
-    background-color: #555;
-    border-color: #666;
+    background-color: #333;
+    border-color: #444;
 }
-
+.dark-mode .feed-item h3 a {
+    color: #fff;
+}
+.dark-mode .feed-item h3 a:visited {
+    color: #888;
+}
+.dark-mode button {
+    color: #fff;
+}
+.dark-mode button:hover, .dark-mode .remove-feed-button:hover, .dark-mode #theme-toggle:hover, .dark-mode #update-feeds:hover, .dark-mode #prev-feed:hover, .dark-mode #next-feed:hover, .dark-mode #add-feed:hover {
+    border-bottom: 1px solid #fff;
+}
 /* Single-feed view styles */
 .single-feed-view #feed-container {
     flex-wrap: nowrap;
