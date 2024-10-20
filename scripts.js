@@ -5,15 +5,12 @@ class FeedManager {
     constructor() {
         // **Requirement 3/5 (JavaScript Basics): Use of arrays, objects, and functions**
         this.feedUrls = JSON.parse(localStorage.getItem('feedUrls')) || [];
-        this.maxFeeds = 20;
+        this.maxFeeds = 10;
         this.currentFeedIndex = 0;
         this.feedMinWidth = 350;
         this.feedElements = new Map();
         this.init();
         //localStorage.removeItem('feedUrls'); // Clear local storage
-    }
-    isMobileDevice() {
-        return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
 
     init() {
@@ -35,7 +32,7 @@ class FeedManager {
         document.getElementById('prev-feed').addEventListener('click', this.showPreviousFeed);
         document.getElementById('next-feed').addEventListener('click', this.showNextFeed);
 
-        if (!this.isMobileDevice()) {
+        if (!/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             window.addEventListener('resize', this.checkViewport);
         }
 
@@ -67,7 +64,7 @@ class FeedManager {
         }
 
         // Sanitize the input
-        feedUrl = this.sanitizeInput(feedUrl);
+        feedUrl = this.sanitizeInputOutput(feedUrl);
 
         if (this.feedUrls.length < this.maxFeeds) {
             this.feedUrls.push(feedUrl);
@@ -88,13 +85,7 @@ class FeedManager {
         }
     }
 
-    sanitizeInput(input) {
-        const div = document.createElement('div');
-        div.textContent = input;
-        return div.innerHTML;
-    }
-
-    sanitizeOutput(output) {
+    sanitizeInputOutput(output) {
         const div = document.createElement('div');
         div.textContent = output;
         return div.innerHTML;
@@ -105,16 +96,8 @@ class FeedManager {
         if (index !== -1) {
             this.feedUrls.splice(index, 1);
             localStorage.setItem('feedUrls', JSON.stringify(this.feedUrls));
-    
-            // Remove the feed element from the Map
             this.feedElements.delete(url);
-    
-            // Adjust the current feed index if necessary
-            if (this.currentFeedIndex >= this.feedUrls.length) {
-                this.currentFeedIndex = Math.max(0, this.feedUrls.length - 1);
-            }
-    
-            // Re-render the feeds
+            this.currentFeedIndex = Math.max(0, this.feedUrls.length - 1);
             this.updateVisibleFeeds();
         } else {
             alert('Feed not found.');
@@ -123,7 +106,6 @@ class FeedManager {
 
     // **Requirement 2/5 (Asynchronous Operations): Successful implementation of an AJAX call or Fetch**
     // **Requirement 3/5 (Asynchronous Operations): Data from the asynchronous call is displayed on the webpage**
-    // **Requirement 4/5 (Asynchronous Operations): Error handling is implemented (for failed API calls, etc.)**
     // **Requirement 5/5 (Asynchronous Operations): Efficient use of asynchronous operations to improve the user experience**
     async renderFeeds() {
         this.feedElements.clear();
@@ -136,7 +118,7 @@ class FeedManager {
         await new Promise(resolve => setTimeout(resolve, 1000)); // Artificial delay for loading indicator
     
         if (this.feedUrls.length === 0) {
-            loadingIndicator.style.display = 'none'; // Hide loading indicator
+            loadingIndicator.style.display = 'none';
             feedContainer.innerHTML = '<p>No feeds added. Please add an RSS feed URL.</p>';
             document.getElementById('feed-navigation').style.display = 'none';
             return;
@@ -165,30 +147,27 @@ class FeedManager {
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
         
-            // Check for parsing errors
+            // **Requirement 4/5 (Asynchronous Operations): Error handling is implemented (for failed API calls, etc.)**
             const parserError = xmlDoc.querySelector('parsererror');
             if (parserError) {
                 throw new Error('Error parsing XML: ' + parserError.textContent);
             }
         
-            // Extract feed title and items
             const channel = xmlDoc.querySelector('channel');
             const feedTitle = channel.querySelector('title').textContent;
             const items = Array.from(channel.querySelectorAll('item'));
         
-            this.updateFeedHeader(feedColumn, feedTitle, url); // Pass url instead of index
+            this.updateFeedHeader(feedColumn, feedTitle, url);
             this.displayFeed(feedColumn, items);
         } catch (error) {
             console.error('Error fetching or parsing feed:', error);
-            this.updateFeedHeader(feedColumn, `Feed Error`, url); // Pass url instead of index
+            this.updateFeedHeader(feedColumn, `Feed Error`, url);
         
-            // Append error message using DOM methods
             const errorMessage = document.createElement('p');
             errorMessage.textContent = 'Error loading feed.';
             feedColumn.appendChild(errorMessage);
         }
         
-        // Store the feed element using url as the key
         this.feedElements.set(url, feedColumn);
     }
 
@@ -205,7 +184,7 @@ class FeedManager {
         removeButton.textContent = 'Remove';
     
         removeButton.addEventListener('click', () => {
-            this.removeFeed(url); // Use url instead of index
+            this.removeFeed(url);
         });
     
         header.appendChild(removeButton);
@@ -221,8 +200,8 @@ class FeedManager {
             const mediaElement = item.querySelector('media\\:content, enclosure'); // RSS images
             const enclosureElement = item.querySelector('enclosure'); // Another way of including media
     
-            const title = titleElement ? this.sanitizeOutput(titleElement.textContent) : 'No title';
-            const link = linkElement ? this.sanitizeOutput(linkElement.textContent) : '#';
+            const title = titleElement ? this.sanitizeInputOutput(titleElement.textContent) : 'No title';
+            const link = linkElement ? this.sanitizeInputOutput(linkElement.textContent) : '#';
             const description = descriptionElement
             ? DOMPurify.sanitize(descriptionElement.textContent, { ALLOWED_TAGS: ['b', 'br', 'center'] })
             : 'No description';
@@ -261,7 +240,7 @@ class FeedManager {
             cardTitle.appendChild(titleLink);
     
             const cardDescription = document.createElement('p');
-            cardDescription.innerHTML = description; // Assuming description may contain HTML
+            cardDescription.innerHTML = description;
     
             card.appendChild(cardTitle);
             card.appendChild(cardDescription);
@@ -358,5 +337,4 @@ class FeedManager {
     }
 }
 
-// Instantiate the FeedManager
 const feedManager = new FeedManager();
