@@ -22,8 +22,11 @@ header, footer {
     text-align: center;
     padding: 1em 0;
 }
-
-#theme-toggle, #update-feeds, #prev-feed, #next-feed, #add-feed {
+header a {
+    text-decoration: none;
+    color: #333;
+}
+#theme-toggle, #update-feeds, #prev-feed, #next-feed, #add-feed, #support {
     background: none;
     border: none;
     margin-top: 0.5em;
@@ -32,7 +35,7 @@ header, footer {
     cursor: pointer;
 }
 
-#theme-toggle:hover, #update-feeds:hover, #prev-feed:hover, #next-feed:hover, #add-feed:hover {
+#theme-toggle:hover, #update-feeds:hover, #prev-feed:hover, #next-feed:hover, #add-feed:hover, #support:hover {
     border-bottom: 1px solid #333;
 }
 #next-feed:disabled, #prev-feed:disabled {
@@ -127,6 +130,9 @@ header, footer {
 .dark-mode header, .dark-mode footer {
     background-color: #333;
 }
+.dark-mode header a{
+    color: whitesmoke;
+}
 
 .dark-mode .feed-item {
     background-color: #333;
@@ -138,11 +144,28 @@ header, footer {
 .dark-mode .feed-item h3 a:visited {
     color: #888;
 }
-.dark-mode button {
+.dark-mode button, .dark-mode #support {
     color: whitesmoke;
 }
-.dark-mode button:hover, .dark-mode .remove-feed-button:hover, .dark-mode #theme-toggle:hover, .dark-mode #update-feeds:hover, .dark-mode #prev-feed:hover, .dark-mode #next-feed:hover, .dark-mode #add-feed:hover {
+.dark-mode button:hover, .dark-mode .remove-feed-button:hover, .dark-mode #theme-toggle:hover, .dark-mode #update-feeds:hover, .dark-mode #prev-feed:hover, .dark-mode #next-feed:hover, .dark-mode #add-feed:hover, .dark-mode #support:hover {
     border-bottom: 1px solid #fff;
+}
+/* Dark mode table styles */
+.dark-mode table {
+    background-color: #333;
+    color: whitesmoke;
+}
+
+.dark-mode table th {
+    background-color: #444;
+}
+
+.dark-mode table td a {
+    color: #bbb;
+}
+
+.dark-mode table td a:hover {
+    color: whitesmoke;
 }
 
 /* Single-feed view styles */
@@ -189,4 +212,34 @@ header, footer {
     height: auto;
     display: block;
     margin: 10px 0;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+table td a {
+    color: #333;
+    text-decoration: none;
+}
+
+table td a:hover {
+    text-decoration: underline;
+}
+
+section {
+    width: 80%;
+    margin: 0 auto;
 }

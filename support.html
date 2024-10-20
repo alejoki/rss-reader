@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - RSS Feed Reader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- 2/5: HTML structure with clear content differentiation (headings, paragraphs, lists). -->
+        <h1><a href="/">RSS Feed Reader</a></h1>
+        <button id="theme-toggle">Light/Dark Mode</button>
+        <a id="support" href="/">Return</a>
+    </header>
+
+    <main>
+        <section>
+            <h2>Compatibility Information</h2>
+            <p>
+                RSS Feed Reader supports many RSS and XML feeds but there can be issues with some sources. 
+                These sources below have been confirmed to work. If you encounter any issues or bugs, please report it on <a href="https://github.com/alejoki/rss-site/">GitHub.</a>
+            </p>
+
+            <h3>Confirmed Compatible Sources</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source Name</th>
+                        <th>Feed URL</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ilta-Sanomat</td>
+                        <td><a href="https://www.is.fi/info/art-2000009880115.html" target="_blank">https://www.is.fi/info/art-2000009880115.html</a></td>
+                        <td>News</td>
+                    </tr>
+                    <tr>
+                        <td>Helsingin Sanomat</td>
+                        <td><a href="https://www.hs.fi/info/art-2000006426059.html" target="_blank">https://www.hs.fi/info/art-2000006426059.html</a></td>
+                        <td>News</td>
+                    </tr>
+                    <tr>
+                        <td>YLE Uutiset</td>
+                        <td><a href="https://yle.fi/uutiset/rss" target="_blank">https://yle.fi/uutiset/rss</a></td>
+                        <td>News</td>
+                    </tr>
+                    <tr>
+                        <td>Iltalehti</td>
+                        <td><a href="https://www.iltalehti.fi/rss" target="_blank">https://www.iltalehti.fi/rss</a></td>
+                        <td>News</td>
+                    </tr>
+                    <tr>
+                        <td>Kaleva</td>
+                        <td><a href="https://www.kaleva.fi/rss" target="_blank">https://www.kaleva.fi/rss</a></td>
+                        <td>News</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Aleksi Jokinen</p>
+    </footer>
+    <script>
+        // Dark mode toggle script
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        });
+
+        // Load the saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
