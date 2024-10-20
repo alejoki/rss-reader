@@ -16,7 +16,7 @@
 - support.html line 26-60
 
 5/5: Consistent use of semantic HTML throughout, ensuring better structure and understanding of the content.
-- index.html line
+- index.html line 12-46
 
 ### CSS (25%)
 1/5: Basic CSS styling (colors, fonts).
