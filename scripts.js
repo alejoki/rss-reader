@@ -210,14 +210,21 @@ class FeedManager {
             card.className = 'feed-item';
             const deleteButton = document.createElement('button');
             deleteButton.className = 'delete-feed-item';
-            const deleteIcon = document.createElement('img');
-            deleteIcon.className = 'delete-icon';
-            deleteIcon.src = './svg/cross.svg';
-            deleteIcon.alt = 'Delete';
-            deleteButton.appendChild(deleteIcon);
+
+            // Fetch and inline the SVG
+            fetch('./svg/cross.svg')
+                .then(response => response.text())
+                .then(svgText => {
+                deleteButton.innerHTML = svgText;
+                const svgElement = deleteButton.querySelector('svg');
+                svgElement.classList.add('delete-icon');
+            })
+            .catch(error => console.error('Error fetching SVG:', error));
+
             deleteButton.addEventListener('click', () => {
                 card.remove();
             });
+
             card.appendChild(deleteButton);
 
             // Handle images if found in <media:content> or <enclosure> elements
