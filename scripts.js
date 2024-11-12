@@ -208,6 +208,17 @@ class FeedManager {
     
             const card = document.createElement('div');
             card.className = 'feed-item';
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-feed-item';
+            const deleteIcon = document.createElement('img');
+            deleteIcon.className = 'delete-icon';
+            deleteIcon.src = '/svg/cross.svg';
+            deleteIcon.alt = 'Delete';
+            deleteButton.appendChild(deleteIcon);
+            deleteButton.addEventListener('click', () => {
+                card.remove();
+            });
+            card.appendChild(deleteButton);
 
             // Handle images if found in <media:content> or <enclosure> elements
             if (mediaElement) {
