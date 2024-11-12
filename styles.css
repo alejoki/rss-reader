@@ -167,6 +167,9 @@ header a {
 .dark-mode table td a:hover {
     color: whitesmoke;
 }
+.dark-mode .delete-icon {
+    fill: whitesmoke;
+}
 
 /* Single-feed view styles */
 .single-feed-view #feed-container {

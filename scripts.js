@@ -212,7 +212,7 @@ class FeedManager {
             deleteButton.className = 'delete-feed-item';
             const deleteIcon = document.createElement('img');
             deleteIcon.className = 'delete-icon';
-            deleteIcon.src = '/svg/cross.svg';
+            deleteIcon.src = './svg/cross.svg';
             deleteIcon.alt = 'Delete';
             deleteButton.appendChild(deleteIcon);
             deleteButton.addEventListener('click', () => {
