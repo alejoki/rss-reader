@@ -1,6 +1,6 @@
-# rss-site
+# rss-reader
 
-https://alejoki.github.io/rss-site/
+https://alejoki.github.io/rss-reader/
 
 ## Arviointikriteerit
 
